@@ -1,16 +1,22 @@
 import { useState, useEffect, useCallback } from "react";
 import { nanoid } from "nanoid";
 import he from "he";
+import "./Questions.css";
 
 export default function Questions({ goToStart }) {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(null); // initilized null (no token yet)
   const [checked, setChecked] = useState(false);
   const [questions, setQuestions] = useState([]); // array of qns obj
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // null because currenty no error
 
   // 1. Fetch session token ONCE on mount (to prevent duplicate questions)
   useEffect(() => {
     async function fetchToken() {
+      setLoading(true); // show spinner while fetching token
+      setError(null); // clear any previous errors
+
       try {
         const tokenRes = await fetch(
           "https://opentdb.com/api_token.php?command=request",
@@ -32,6 +38,9 @@ export default function Questions({ goToStart }) {
         setToken(tokenData.token); // string
       } catch (error) {
         console.error(error);
+        setError("Failed to get session token. Please try again.");
+      } finally {
+        setLoading(false); // spinner disappears even if error happens
       }
     }
 
@@ -41,6 +50,8 @@ export default function Questions({ goToStart }) {
   // 2. Fetch 5 multiple choice questions from any categories (mixed) with SAME token
   const fetchQuestions = useCallback(async () => {
     // Reset states when play again
+    setLoading(true); // loading spinner while fetching
+    setError(null); // clear old errors
     setChecked(false);
     setScore(0);
 
@@ -50,7 +61,9 @@ export default function Questions({ goToStart }) {
       );
 
       if (!questionRes.ok) {
-        throw new Error(`Failed to fetch questions: ${questionRes.status}`);
+        throw new Error(
+          `Failed to fetch questions! status: ${questionRes.status}`,
+        );
       }
 
       const questionData = await questionRes.json();
@@ -89,9 +102,13 @@ export default function Questions({ goToStart }) {
       // setQuestions(formattedQuestions);
     } catch (error) {
       console.error(error);
+      setError("Somethine went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
   }, [token]);
 
+  // Fetch questions data form API on mount after retrieving token
   useEffect(() => {
     if (!token) return; // exit func
     fetchQuestions();
@@ -199,6 +216,29 @@ export default function Questions({ goToStart }) {
     return ""; // all other unselected answers stay neutral
   }
 
+  // early returns
+  if (loading) {
+    return (
+      <section>
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading questions...</p>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section>
+        <div className="error-container">
+          <p>{error}</p>
+          <button onClick={fetchQuestions}>Retry</button>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <>
       <section>
@@ -237,7 +277,13 @@ export default function Questions({ goToStart }) {
           })}
         </div>
         <div className="controls">
-          <button onClick={checked ? playAgain : checkAnswers}>
+          <button
+            onClick={checked ? playAgain : checkAnswers}
+            disabled={
+              !checked &&
+              !questions.every((question) => question.selectedAnswer)
+            }
+          >
             {checked ? "Play again" : "Check answers"}
           </button>
           {checked && (
