@@ -15,8 +15,8 @@ A multiple-choice quiz solo project from the [Scrimba Frontend Developer Career 
 - **Frontend:** `React`, `Vite`, `JavaScript`, `CSS`
 - **External APIs:** [Trivia API](https://opentdb.com/api_config.php) – Retrieve questions data
 - **npm Packages:**
-  - `nanoid` – Generates unique IDs for questions and answers
-  - `he` (HTML Entities) – Decodes HTML entities from API responses (e.g: `&quot;` → `"`)
+  - [nanoid](https://www.npmjs.com/package/nanoid) – Generates unique IDs for questions and answers
+  - [he](https://www.npmjs.com/package/he#hedecodehtml-options) (HTML Entities) – Decodes HTML entities from API responses (e.g: `&quot;` → `"`)
 
 ## ✨ Features
 
