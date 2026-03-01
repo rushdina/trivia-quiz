@@ -36,7 +36,7 @@ export async function fetchQuestions(token) {
   }
 
   const questionsData = await questionsRes.json();
-  console.log("Questions Data:", questionsData);
+  // console.log("Questions Data:", questionsData);
   /* 
     {
       response_code: 0,

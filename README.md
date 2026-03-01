@@ -1,16 +1,74 @@
-# React + Vite
+# 🍿 Trivia Quizzical
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A multiple-choice quiz solo project from the [Scrimba Frontend Developer Career Path](https://scrimba.com/frontend-path-c0j). This app fetches multiple-choice questions from the **Open Trivia Database API**, allowing users to select answers, check their score, and play multiple rounds without repeating questions. Answers are shuffled, correct and incorrect selections are highlighted, and the app handles token expiration for a smooth quiz experience.
 
-Currently, two official plugins are available:
+## 🖼️ Preview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔗 Live Demo: https://scrimba-quizzical-rushdina.vercel.app/
 
-## React Compiler
+![Quizzical Start Page Preview](images/preview/preview-quizzical-start.png)
+![Quizzical Questions Page Preview](images/preview/preview-quizzical-questions.png)
+![Quizzical Checked Answers Page Preview](images/preview/preview-quizzical-checkedAnswers.png)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Technologies Used
 
-## Expanding the ESLint configuration
+- **Frontend:** `React`, `Vite`, `JavaScript`, `CSS`
+- **External APIs:** [Trivia API](https://opentdb.com/api_config.php) – Retrieve questions data
+- **npm Packages:**
+  - **nanoid** – Generates unique IDs for questions and answers
+  - **he (HTML Entities)** – Decodes HTML entities from API responses (e.g: `&quot;` → `"`)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+
+- Fetches random multiple-choice mixed-category questions from the Open Trivia Database API.
+- Shuffles answer options are randomized to make each quiz unique.
+- Calculates and displays user score after checking answers.
+- Handles session tokens to avoid duplicate questions and expired tokens.
+- Reset and play a new set of questions anytime.
+- Responsive, user-friendly UI with loading state and error handling.
+- Decodes HTML entities in questions and answers using the `he` package.
+
+## ⚡ How to Run Locally
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/<username>/<repository>.git
+cd <repository>
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Run development server**
+
+```bash
+npm run dev
+```
+
+4. Open the **Localhost URL** (`http://localhost:5173`) shown in your terminal.
+
+## 🚀 Usage
+
+1. Click **Start Quiz**
+2. Select one answer for each question
+3. Click **Check Answers**
+4. View your score
+5. Click **Play Again** to fetch new questions
+
+## 🧠 Challenges Encountered
+
+## 📚 What I Learned
+
+## 💡 Future Improvements
+
+- Difficulty and category filters
+- Timer mode
+
+## 🙌 Acknowledgements
+
+- **Scrimba course:** [Scrimba Frontend Developer Career Path](https://scrimba.com/frontend-path-c0j)
+- **Design reference:** [Figma by Scrimba](https://www.figma.com/design/E9S5iPcm10f0RIHK8mCqKL/Quizzical-App?node-id=8-448&t=1PTwhDp6TAwDlrhX-0)

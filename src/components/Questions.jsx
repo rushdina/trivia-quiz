@@ -49,7 +49,7 @@ export default function Questions() {
         return formatQuestionObj(questionObj);
       });
 
-      console.log("Formatted Questions:", formattedQuestionsArr);
+      // console.log("Formatted Questions:", formattedQuestionsArr);
       setQuestions(formattedQuestionsArr);
     } catch (error) {
       console.error(error);
