@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import QuestionCard from "./QuestionCard.jsx";
 import { fetchToken, resetToken, fetchQuestions } from "../api/triviaAPI.js";
-import { formatQuestionObj } from "../utils/formatQuestion.js";
+import { formatQuestionObj } from "../utils/formatQuestionObj.js";
 import "./Questions.css";
 
 export default function Questions() {
