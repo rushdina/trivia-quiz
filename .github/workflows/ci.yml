@@ -1,0 +1,43 @@
+name: CI - Lint & Test
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+# Concurrency: only 1 workflow runs at a time
+concurrency:
+  group: "react-vite-pages"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run Lint and Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Setup Node
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4. Run ESLint
+      - name: Run Lint
+        run: npm run lint
+
+      # 5. Run Vitest (CI mode)
+      - name: Run Tests
+        run: npm run test:ci
