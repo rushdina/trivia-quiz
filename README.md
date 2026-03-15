@@ -4,7 +4,7 @@ A multiple-choice quiz app that fetches multiple-choice questions from the `Open
 
 ## 🖼️ Preview
 
-🔗 Live Demo: https://trivia-quizzical-rushdina.vercel.app/ 
+🔗 Live Demo: https://trivia-quiz-rushdina.vercel.app/ 
 
 ![Quizzical Start Page Preview](./src/assets/preview/preview-quizzical-start.png)
 ![Quizzical Questions Page Preview](./src/assets/preview/preview-quizzical-questions.png)
